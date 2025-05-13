@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: my-nfs-storage
+  namespace: erp
+provisioner: kubernetes.io/nfs # Or a specific NFS provisioner
+parameters:
+  server: your-nfs-server-ip
+  path: "/mnt/erp"
+allowVolumeExpansion: true

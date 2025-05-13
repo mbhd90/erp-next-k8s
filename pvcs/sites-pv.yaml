@@ -9,6 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce # Or ReadWriteMany, depending on your needs
   persistentVolumeReclaimPolicy: Retain # Or Delete
+  storageClassName:  my-nfs-storage
   hostPath:
     path: /mnt/erp/sites # Adjust to your actual host path
     type: Directory

@@ -9,6 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain # Or Delete
+  storageClassName:  my-nfs-storage
   hostPath:
     path: /mnt/erp/redis-cache-data # Adjust to your actual host path
     type: Directory
