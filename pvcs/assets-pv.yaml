@@ -10,4 +10,5 @@ spec:
     - ReadWriteOnce # Or ReadWriteMany, depending on your needs
   persistentVolumeReclaimPolicy: Retain # Or Delete
   hostPath:
-    path: ${PWD}/assets # Adjust to your actual host path
+    path: /mnt/erp/assets # Adjust to your actual host path
+    type: Directory

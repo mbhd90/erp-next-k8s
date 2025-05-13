@@ -5,7 +5,7 @@ metadata:
   namespace: erp
 spec:
   accessModes:
-    - ReadWriteOnce # Must match the PV access mode
+    - ReadWriteMany # Must match the PV access mode
   resources:
     requests:
       storage: 10Gi # Must match the PV capacity

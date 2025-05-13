@@ -10,4 +10,5 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain # Or Delete
   hostPath:
-    path: ${PWD}/redis-queue-data # Adjust to your actual host path
+    path: /mnt/erp/redis-queue-data # Adjust to your actual host path
+    type: Directory
