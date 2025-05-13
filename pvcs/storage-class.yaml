@@ -3,8 +3,7 @@ kind: StorageClass
 metadata:
   name: my-nfs-storage
   namespace: erp
-provisioner: kubernetes.io/nfs # Or a specific NFS provisioner
+provisioner: pd.csi.storage.gke.io
 parameters:
-  server: your-nfs-server-ip
-  path: "/mnt/erp"
-allowVolumeExpansion: true
+  type: pd-ssd
+volumeBindingMode: WaitForFirstConsumer
