@@ -5,11 +5,11 @@ metadata:
   namespace: erp
 spec:
   capacity:
-    storage: 10Gi # Adjust as needed
+    storage: 10Gi 
   accessModes:
-    - ReadWriteOnce # Or ReadWriteMany, depending on your needs
-  persistentVolumeReclaimPolicy: Retain # Or Delete
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain 
   storageClassName:  my-nfs-storage
   hostPath:
-    path: /mnt/erp/assets # Adjust to your actual host path
+    path: /mnt/erp/assets
     type: Directory

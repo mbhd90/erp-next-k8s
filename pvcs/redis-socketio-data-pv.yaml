@@ -5,11 +5,11 @@ metadata:
   namespace: erp
 spec:
   capacity:
-    storage: 5Gi # Adjust as needed
+    storage: 5Gi 
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain # Or Delete
+  persistentVolumeReclaimPolicy: Retain 
   storageClassName:  my-nfs-storage
   hostPath:
-    path: /mnt/erp/redis-socketio-data # Adjust to your actual host path
+    path: /mnt/erp/redis-socketio-data
     type: Directory

@@ -5,11 +5,11 @@ metadata:
   namespace: erp
 spec:
   capacity:
-    storage: 20Gi # Adjust as needed
+    storage: 20Gi 
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain # Or Delete
+  persistentVolumeReclaimPolicy: Retain 
   storageClassName:  my-nfs-storage
   hostPath:
-    path: /mnt/erp/db-data # Adjust to your actual host path
+    path: /mnt/erp/db-data
     type: Directory

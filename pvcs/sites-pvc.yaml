@@ -5,9 +5,9 @@ metadata:
   namespace: erp
 spec:
   accessModes:
-    - ReadWriteMany # Must match the PV access mode
+    - ReadWriteMany 
   resources:
     requests:
-      storage: 10Gi # Must match the PV capacity
+      storage: 10Gi 
   storageClassName:  my-nfs-storage
   volumeName: sites-pv # Remove this if you are using a StorageClass
