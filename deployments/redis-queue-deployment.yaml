@@ -13,12 +13,16 @@ spec:
       labels:
         app: redis-queue
     spec:
+      restartPolicy: Always
       containers:
         - name: redis-queue
           image: redis:6.2-alpine
-          restartPolicy: Always
           ports:
             - containerPort: 6379
           volumeMounts:
             - name: redis-queue-data-volume
               mountPath: /data
+      volumes:
+        - name: redis-queue-data-volume
+          persistentVolumeClaim:
+            claimName: redis-queue-data-pvc

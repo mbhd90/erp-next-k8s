@@ -13,10 +13,10 @@ spec:
       labels:
         app: websocket
     spec:
+      restartPolicy: Always
       containers:
         - name: websocket
           image: frappe/frappe-socketio:${SOFTWARE_VERSION_TAG}
-          restartPolicy: Always
           ports:
             - containerPort: 9000
           volumeMounts:
@@ -24,3 +24,10 @@ spec:
               mountPath: /home/frappe/frappe-bench/sites
             - name: assets-volume
               mountPath: /home/frappe/frappe-bench/sites/assets
+      volumes:
+        - name: sites-volume
+          persistentVolumeClaim:
+            claimName: sites-pvc
+        - name: assets-volume
+          persistentVolumeClaim:
+            claimName: assets-pvc

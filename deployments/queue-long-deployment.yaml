@@ -13,13 +13,20 @@ spec:
       labels:
         app: queue-long
     spec:
+      restartPolicy: Always
       containers:
         - name: queue-long
           image: frappe/erpnext-worker:${SOFTWARE_VERSION_TAG}
-          restartPolicy: Always
           command: ["bench", "worker", "--queue", "long"]
           volumeMounts:
             - name: sites-volume
               mountPath: /home/frappe/frappe-bench/sites
             - name: assets-volume
               mountPath: /home/frappe/frappe-bench/sites/assets
+      volumes:
+        - name: sites-volume
+          persistentVolumeClaim:
+            claimName: sites-pvc
+        - name: assets-volume
+          persistentVolumeClaim:
+            claimName: assets-pvc

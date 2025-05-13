@@ -13,12 +13,16 @@ spec:
       labels:
         app: redis-cache
     spec:
+      restartPolicy: Always
       containers:
         - name: redis-cache
           image: redis:6.2-alpine
-          restartPolicy: Always
           ports:
             - containerPort: 6379
           volumeMounts:
             - name: redis-cache-data-volume
               mountPath: /data
+      volumes:
+        - name: redis-cache-data-volume
+          persistentVolumeClaim:
+            claimName: redis-cache-data-pvc

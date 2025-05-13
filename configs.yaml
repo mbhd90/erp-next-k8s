@@ -4,15 +4,15 @@ metadata:
   name: erpnext-configs
   namespace: erp
 data:
-  db-host: ${DB_HOST}
-  db-port: ${DB_PORT}
-  redis-cache: ${REDIS_CACHE}
-  redis-queue: ${REDIS_QUEUE}
-  redis-socket: ${REDIS_SOCKETIO}
-  socket-port: ${SOCKETIO_PORT}
-  socket-io: ${SOCKETIO}
-  backend-host: ${BACKEND}
-  frappe-header: ${FRAPPE_SITE_NAME_HEADER}
-  uppstream-ip: ${UPSTREAM_REAL_IP_ADDRESS}
-  uppstream-header: ${UPSTREAM_REAL_IP_HEADER}
-  uppstream-recursive: ${UPSTREAM_REAL_IP_RECURSIVE}
+  db-host: "db-service"
+  db-port: "3306"
+  redis-cache: "redis-cache-service:6379"
+  redis-queue: "redis-queue-service:6379"
+  redis-socket: "redis-socketio-service:6379"
+  socket-port: "9000"
+  socket-io: "websocket-service:9000"
+  backend-host: "backend-service:8000"
+  frappe-header: "X-Frappe-Site-Name"
+  uppstream-ip: "198.7.119.0"
+  uppstream-header: "X-Forwarded-For"
+  uppstream-recursive: "on"

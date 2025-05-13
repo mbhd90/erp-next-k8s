@@ -13,9 +13,6 @@ spec:
       labels:
         app: frontend
     spec:
-      dependsOn: # Kubernetes doesn't have direct depends_on, use init containers or application-level logic
-        - backend-deployment
-        - websocket-deployment
       containers:
         - name: frontend
           image: frappe/erpnext-nginx:${SOFTWARE_VERSION_TAG}
@@ -58,3 +55,10 @@ spec:
               mountPath: /usr/share/nginx/html/sites
             - name: assets-volume
               mountPath: /usr/share/nginx/html/assets
+      volumes:
+        - name: sites-volume
+          persistentVolumeClaim:
+            claimName: sites-pvc
+        - name: assets-volume
+          persistentVolumeClaim:
+            claimName: assets-pvc

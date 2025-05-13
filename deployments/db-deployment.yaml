@@ -13,10 +13,10 @@ spec:
       labels:
         app: db
     spec:
+      restartPolicy: Always
       containers:
         - name: db
           image: mariadb:10.6
-          restartPolicy: Always
           command:
             - "--character-set-server=utf8mb4"
             - "--collation-server=utf8mb4_unicode_ci"
@@ -33,3 +33,7 @@ spec:
           volumeMounts:
             - name: db-data-volume
               mountPath: /var/lib/mysql
+      volumes:
+        - name: db-data-volume
+          persistentVolumeClaim:
+            claimName: sites-pvc

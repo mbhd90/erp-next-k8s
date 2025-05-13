@@ -13,12 +13,16 @@ spec:
       labels:
         app: redis-socketio
     spec:
+      restartPolicy: Always
       containers:
         - name: redis-socketio
           image: redis:6.2-alpine
-          restartPolicy: Always
           ports:
             - containerPort: 6379
           volumeMounts:
             - name: redis-socketio-data-volume
               mountPath: /data
+      volumes:
+        - name: redis-socketio-data-volume
+          persistentVolumeClaim:
+            claimName: redis-socketio-data-pvc
