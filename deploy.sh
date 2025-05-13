@@ -34,3 +34,7 @@ kubectl apply -f services/redis-socketio-service.yaml
 kubectl apply -f services/websocket-service.yaml
 kubectl apply -f services/backend-service.yaml
 kubectl apply -f services/frontend-service.yaml
+
+# sudo apt install nfs-common
+# mkdir /mnt/erp
+# sudo mount -t nfs -o port=3049,vers=4 IP:/erp /mnt/erp
