@@ -15,17 +15,85 @@ spec:
     spec:
       restartPolicy: Always
       initContainers:
+        - name: wait-for-db
+          image: busybox:latest
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: db-host
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until nc -z -w 5 ${DB_HOST} 3306; do
+                echo "Waiting for DB..."
+                sleep 5
+              done
+              echo "Database is ready!"
+        - name: wait-for-redis-cache
+          image: busybox:latest
+          env:
+            - name: REDIS_CACHE
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: redis-cache
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until nc -z -w 5 ${REDIS_CACHE} 6379; do
+                echo "Waiting for Redis Cache..."
+                sleep 5
+              done
+              echo "Redis Cache is ready!"
+        - name: wait-for-redis-queue
+          image: busybox:latest
+          env:
+            - name: REDIS_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: redis-queue
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until nc -z -w 5 ${REDIS_QUEUE} 6379; do
+                echo "Waiting for Redis Queue..."
+                sleep 5
+              done
+              echo "Redis Queue is ready!"
+        - name: wait-for-redis-queue
+          image: busybox:latest
+          env:
+            - name: REDIS_SOCKETIO
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: redis-socket
+            - name: SOCKETIO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: socket-port
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until nc -z -w 5 ${REDIS_SOCKETIO} ${SOCKETIO_PORT}; do
+                echo "Waiting for Redis SocketIO..."
+                sleep 5
+              done
+              echo "Redis SocketIO is ready!"
         - name: create-site
           image: frappe/erpnext-worker:latest
           command: [ "bash", "-c" ]
           args:
             - >
               set -e;
-              until nc -z -w 5 ${DB_HOST} 3306; do echo "Waiting for DB..."; sleep 5; done;
-              until nc -z -w 5 ${REDIS_CACHE} 6379; do echo "Waiting for Redis Cache..."; sleep 5; done;
-              until nc -z -w 5 ${REDIS_QUEUE} 6379; do echo "Waiting for Redis Queue..."; sleep 5; done;
-              until nc -z -w 5 ${REDIS_SOCKETIO} ${SOCKETIO_PORT}; do echo "Waiting for Redis SocketIO..."; sleep 5; done;
-              echo "Dependencies ready";
               bench new-site frontend --admin-password=${ADMIN_PASSWORD} --db-root-password=${MYSQL_ROOT_PASSWORD} --install-app payments --install-app erpnext --set-default;
           env:
             - name: MYSQL_ROOT_PASSWORD
@@ -38,36 +106,6 @@ spec:
                 secretKeyRef:
                   name: erpnext-secrets
                   key: admin-password
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: erpnext-configs
-                  key: db-host
-            - name: DB_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: erpnext-configs
-                  key: db-port
-            - name: REDIS_CACHE
-              valueFrom:
-                configMapKeyRef:
-                  name: erpnext-configs
-                  key: redis-cache
-            - name: REDIS_QUEUE
-              valueFrom:
-                configMapKeyRef:
-                  name: erpnext-configs
-                  key: redis-queue
-            - name: REDIS_SOCKETIO
-              valueFrom:
-                configMapKeyRef:
-                  name: erpnext-configs
-                  key: redis-socket
-            - name: SOCKETIO_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: erpnext-configs
-                  key: socket-port
           volumeMounts:
             - name: sites-volume
               mountPath: /home/frappe/frappe-bench/sites
