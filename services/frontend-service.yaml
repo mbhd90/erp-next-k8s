@@ -9,5 +9,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80 # Standard HTTP port
-      targetPort: 8080
+      targetPort: 9999
   type: LoadBalancer # Or NodePort if you're not using a cloud load balancer
