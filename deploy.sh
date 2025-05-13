@@ -24,7 +24,7 @@ kubectl apply -f pvcs/sites-pvc.yaml
 # Deployments
 kubectl apply -f deployments/backend-deployment.yaml
 kubectl apply -f deployments/configurator-deployment.yaml
-kubectl apply -f deployments/create-site-job.yaml
+# kubectl apply -f deployments/create-site-job.yaml
 kubectl apply -f deployments/db-deployment.yaml
 kubectl apply -f deployments/frontend-deployment.yaml
 kubectl apply -f deployments/queue-default-deployment.yaml
