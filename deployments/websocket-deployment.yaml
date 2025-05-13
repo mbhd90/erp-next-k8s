@@ -16,7 +16,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: websocket
-          image: frappe/frappe-socketio:${SOFTWARE_VERSION_TAG}
+          image: frappe/frappe-socketio:latest
           ports:
             - containerPort: 9000
           volumeMounts:

@@ -9,7 +9,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: create-site
-          image: frappe/erpnext-worker:${SOFTWARE_VERSION_TAG}
+          image: frappe/erpnext-worker:latest
           command: ["bash", "-c"]
           args:
             - >

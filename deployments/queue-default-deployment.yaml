@@ -16,7 +16,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: queue-default
-          image: frappe/erpnext-worker:${SOFTWARE_VERSION_TAG}
+          image: frappe/erpnext-worker:latest
           command: ["bench", "worker", "--queue", "default"]
           volumeMounts:
             - name: sites-volume

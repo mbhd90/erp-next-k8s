@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: frappe/erpnext-nginx:${SOFTWARE_VERSION_TAG}
+          image: frappe/erpnext-nginx:latest
           restartPolicy: Always
           ports:
             - containerPort: 8080

@@ -16,7 +16,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: backend
-          image: frappe/erpnext-worker:${SOFTWARE_VERSION_TAG}
+          image: frappe/erpnext-worker:latest
           volumeMounts:
             - name: sites-volume
               mountPath: /home/frappe/frappe-bench/sites
