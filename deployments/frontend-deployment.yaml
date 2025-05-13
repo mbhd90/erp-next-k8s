@@ -22,32 +22,32 @@ spec:
           env:
             - name: BACKEND
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: erpnext-configs
                   key: backend-host
             - name: FRAPPE_SITE_NAME_HEADER
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: erpnext-configs
                   key: frappe-header
             - name: SOCKETIO
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: erpnext-configs
                   key: socket-io
             - name: UPSTREAM_REAL_IP_ADDRESS
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: erpnext-configs
                   key: uppstream-ip
             - name: UPSTREAM_REAL_IP_HEADER
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: erpnext-configs
                   key: uppstream-header
             - name: UPSTREAM_REAL_IP_RECURSIVE
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: erpnext-configs
                   key: uppstream-recursive
           volumeMounts:
