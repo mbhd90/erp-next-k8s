@@ -12,7 +12,7 @@ spec:
       labels:
         app: configurator
     spec:
-      restartPolicy: OnFailure
+      #restartPolicy: OnFailure
       containers:
         - name: configurator
           image: frappe/erpnext-worker:latest

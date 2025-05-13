@@ -13,10 +13,10 @@ spec:
       labels:
         app: frontend
     spec:
+      restartPolicy: OnFailure
       containers:
         - name: frontend
           image: frappe/erpnext-nginx:latest
-          restartPolicy: Always
           ports:
             - containerPort: 8080
           env:
