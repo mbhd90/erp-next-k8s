@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-cache-data-pv
+  namespace: erp
+spec:
+  capacity:
+    storage: 5Gi # Adjust as needed
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain # Or Delete
+  hostPath:
+    path: ${PWD}/redis-cache-data # Adjust to your actual host path

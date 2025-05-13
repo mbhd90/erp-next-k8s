@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-socketio-service
+  namespace: erp
+spec:
+  selector:
+    app: redis-socketio
+  ports:
+    - protocol: TCP
+      port: 6379 # Assuming standard Redis port
+      targetPort: 6379 # Assuming standard Redis port
+  type: ClusterIP

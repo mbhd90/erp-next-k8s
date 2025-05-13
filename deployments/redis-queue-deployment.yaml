@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-queue-deployment
+  namespace: erp
+spec:
+  replicas: 1 # Adjust as needed
+  selector:
+    matchLabels:
+      app: redis-queue
+  template:
+    metadata:
+      labels:
+        app: redis-queue
+    spec:
+      containers:
+        - name: redis-queue
+          image: redis:6.2-alpine
+          restartPolicy: Always
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-queue-data-volume
+              mountPath: /data

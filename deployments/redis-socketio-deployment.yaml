@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-socketio-deployment
+  namespace: erp
+spec:
+  replicas: 1 # Adjust as needed
+  selector:
+    matchLabels:
+      app: redis-socketio
+  template:
+    metadata:
+      labels:
+        app: redis-socketio
+    spec:
+      containers:
+        - name: redis-socketio
+          image: redis:6.2-alpine
+          restartPolicy: Always
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-socketio-data-volume
+              mountPath: /data

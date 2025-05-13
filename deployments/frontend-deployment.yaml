@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: erp
+spec:
+  replicas: 2 # Adjust as needed
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      dependsOn: # Kubernetes doesn't have direct depends_on, use init containers or application-level logic
+        - backend-deployment
+        - websocket-deployment
+      containers:
+        - name: frontend
+          image: frappe/erpnext-nginx:${SOFTWARE_VERSION_TAG}
+          restartPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: BACKEND
+              valueFrom:
+                secretKeyRef:
+                  name: erpnext-configs
+                  key: backend-host
+            - name: FRAPPE_SITE_NAME_HEADER
+              valueFrom:
+                secretKeyRef:
+                  name: erpnext-configs
+                  key: frappe-header
+            - name: SOCKETIO
+              valueFrom:
+                secretKeyRef:
+                  name: erpnext-configs
+                  key: socket-io
+            - name: UPSTREAM_REAL_IP_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: erpnext-configs
+                  key: uppstream-ip
+            - name: UPSTREAM_REAL_IP_HEADER
+              valueFrom:
+                secretKeyRef:
+                  name: erpnext-configs
+                  key: uppstream-header
+            - name: UPSTREAM_REAL_IP_RECURSIVE
+              valueFrom:
+                secretKeyRef:
+                  name: erpnext-configs
+                  key: uppstream-recursive
+          volumeMounts:
+            - name: sites-volume
+              mountPath: /usr/share/nginx/html/sites
+            - name: assets-volume
+              mountPath: /usr/share/nginx/html/assets

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queue-short-deployment
+  namespace: erp
+spec:
+  replicas: 1 # Adjust as needed
+  selector:
+    matchLabels:
+      app: queue-short
+  template:
+    metadata:
+      labels:
+        app: queue-short
+    spec:
+      containers:
+        - name: queue-short
+          image: frappe/erpnext-worker:${SOFTWARE_VERSION_TAG}
+          restartPolicy: Always
+          command: ["bench", "worker", "--queue", "short"]
+          volumeMounts:
+            - name: sites-volume
+              mountPath: /home/frappe/frappe-bench/sites
+            - name: assets-volume
+              mountPath: /home/frappe/frappe-bench/sites/assets

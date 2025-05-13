@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queue-default-deployment
+  namespace: erp
+spec:
+  replicas: 1 # Adjust as needed
+  selector:
+    matchLabels:
+      app: queue-default
+  template:
+    metadata:
+      labels:
+        app: queue-default
+    spec:
+      containers:
+        - name: queue-default
+          image: frappe/erpnext-worker:${SOFTWARE_VERSION_TAG}
+          restartPolicy: Always
+          command: ["bench", "worker", "--queue", "default"]
+          volumeMounts:
+            - name: sites-volume
+              mountPath: /home/frappe/frappe-bench/sites
+            - name: assets-volume
+              mountPath: /home/frappe/frappe-bench/sites/assets

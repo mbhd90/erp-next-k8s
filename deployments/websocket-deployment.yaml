@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket-deployment
+  namespace: erp
+spec:
+  replicas: 1 # Adjust as needed
+  selector:
+    matchLabels:
+      app: websocket
+  template:
+    metadata:
+      labels:
+        app: websocket
+    spec:
+      containers:
+        - name: websocket
+          image: frappe/frappe-socketio:${SOFTWARE_VERSION_TAG}
+          restartPolicy: Always
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: sites-volume
+              mountPath: /home/frappe/frappe-bench/sites
+            - name: assets-volume
+              mountPath: /home/frappe/frappe-bench/sites/assets

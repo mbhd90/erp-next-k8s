@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: assets-pvc
+  namespace: erp
+spec:
+  accessModes:
+    - ReadWriteOnce # Must match the PV access mode
+  resources:
+    requests:
+      storage: 10Gi # Must match the PV capacity
+  volumeName: assets-pv # Remove this if you are using a StorageClass

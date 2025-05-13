@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: erpnext-configs
+  namespace: erp
+data:
+  db-host: ${DB_HOST}
+  db-port: ${DB_PORT}
+  redis-cache: ${REDIS_CACHE}
+  redis-queue: ${REDIS_QUEUE}
+  redis-socket: ${REDIS_SOCKETIO}
+  socket-port: ${SOCKETIO_PORT}
+  socket-io: ${SOCKETIO}
+  backend-host: ${BACKEND}
+  frappe-header: ${FRAPPE_SITE_NAME_HEADER}
+  uppstream-ip: ${UPSTREAM_REAL_IP_ADDRESS}
+  uppstream-header: ${UPSTREAM_REAL_IP_HEADER}
+  uppstream-recursive: ${UPSTREAM_REAL_IP_RECURSIVE}

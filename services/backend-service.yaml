@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: erp
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 8000 # Adjust if the backend exposes a different port
+      targetPort: 8000 # Adjust if the backend listens on a different port
+  clusterIP: ClusterIP
