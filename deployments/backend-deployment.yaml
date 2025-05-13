@@ -73,6 +73,43 @@ spec:
               mountPath: /home/frappe/frappe-bench/sites
             - name: assets-volume
               mountPath: /home/frappe/frappe-bench/sites/assets
+        - name: configurator
+          image: frappe/erpnext-worker:latest
+          command: ["python", "configure.py"]
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: db-host
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: db-port
+            - name: REDIS_CACHE
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: redis-cache
+            - name: REDIS_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: redis-queue
+            - name: REDIS_SOCKETIO
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: redis-socket
+            - name: SOCKETIO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: erpnext-configs
+                  key: socket-port
+          volumeMounts:
+            - name: sites-volume
+              mountPath: /home/frappe/frappe-bench/sites
       containers:
         - name: backend
           image: frappe/erpnext-worker:latest

@@ -17,12 +17,12 @@ spec:
       containers:
         - name: db
           image: mariadb:10.6
-          command:
-            - "mariadbd"  # The MariaDB server executable
-            - "--character-set-server=utf8mb4"
-            - "--collation-server=utf8mb4_unicode_ci"
-            - "--skip-character-set-client-handshake"
-            - "--skip-innodb-read-only-compressed"
+          #command:
+          #  - "mariadbd"  # The MariaDB server executable
+          #  - "--character-set-server=utf8mb4"
+          #    - "--collation-server=utf8mb4_unicode_ci"
+          #    - "--skip-character-set-client-handshake"
+          #  - "--skip-innodb-read-only-compressed"
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
