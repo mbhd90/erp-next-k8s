@@ -9,4 +9,5 @@ spec:
   resources:
     requests:
       storage: 5Gi
+  storageClassName:  my-nfs-storage
   volumeName: redis-queue-data-pv # Remove this if you are using a StorageClass

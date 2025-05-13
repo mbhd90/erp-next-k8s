@@ -9,4 +9,5 @@ spec:
   resources:
     requests:
       storage: 20Gi
+  storageClassName:  my-nfs-storage
   volumeName: db-data-pv # Remove this if you are using a StorageClass

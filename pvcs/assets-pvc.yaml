@@ -9,4 +9,5 @@ spec:
   resources:
     requests:
       storage: 10Gi # Must match the PV capacity
+  storageClassName:  my-nfs-storage
   volumeName: assets-pv # Remove this if you are using a StorageClass
